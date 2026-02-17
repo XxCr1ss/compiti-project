@@ -1,0 +1,16 @@
+# Dependencias
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Variables de entorno
+.env
+client/.env
+server/.env
+
+# Build
+dist/
+client/dist/
+
+# Sistema
+.DS_Store

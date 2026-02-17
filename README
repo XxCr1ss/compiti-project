@@ -1,1 +1,46 @@
-Configuración inicial
+# Compiti
+
+Administrador de notas por espacios.
+
+## Stack
+
+- **Frontend:** Vite + React + TypeScript + Tailwind CSS
+- **Backend:** Node.js + Express + TypeScript
+- **Base de datos:** Supabase
+
+## Instalación
+
+### 1. Clonar el repositorio
+git clone <url-del-repo>
+cd compiti
+
+### 2. Configurar el frontend
+cd client
+cp .env.example .env
+# Completar las variables en .env
+npm install
+npm run dev
+
+### 3. Configurar el backend
+cd ../server
+cp .env.example .env
+# Completar las variables en .env
+npm install
+npm run dev
+
+## Variables de entorno
+
+### Cliente (`client/.env`)
+- `VITE_SUPABASE_URL` — URL de tu proyecto en Supabase
+- `VITE_SUPABASE_ANON_KEY` — Clave anon pública de Supabase
+
+### Servidor (`server/.env`)
+- `PORT` — Puerto del servidor (default: 3000)
+- `SUPABASE_URL` — URL de tu proyecto en Supabase
+- `SUPABASE_SERVICE_ROLE_KEY` — Clave service role (privada, nunca exponerla)
+- `CLIENT_URL` — URL del cliente para CORS (default: http://localhost:5173)
+
+## Verificación
+
+- Frontend: http://localhost:5173
+- Backend (health check): http://localhost:3000/api/health
