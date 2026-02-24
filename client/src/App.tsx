@@ -20,9 +20,9 @@
  * - main.tsx (application bootstrap)
  *
  * Notes:
- * This is the default Vite + React template component.
- * It should be replaced or extended when implementing actual
- * application features.
+ * This component currently includes a simple counter example to demonstrate state management in React.
+ * It also wraps the application in the AuthProvider to provide authentication context to all child components.
+ * The AppRouter component is rendered within the AuthProvider to manage routing based on authentication state.
  */
 
 import { AuthProvider } from './context/AuthContext'
@@ -47,9 +47,8 @@ import { AppRouter } from './routes'
 function App() {
   /**
    * Local counter state.
-   *
-   * Used only for demonstration purposes to illustrate
-   * React state updates and re-rendering behavior.
+   * 
+   * This state is used to demonstrate React's useState hook for managing component state.
    */
 
   return (

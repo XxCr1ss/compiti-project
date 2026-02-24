@@ -1,3 +1,27 @@
+/**
+ * LoginPage
+ *
+ * This component renders the login form and handles user authentication.
+ * 
+ * Responsibilities:
+ * - Provide a user interface for users to enter their email and password.
+ * - Handle form submission and call the signIn function from the authentication context.
+ * - Display error messages if authentication fails.
+ * - Redirect authenticated users to the dashboard page.
+ * 
+ * Layer:
+ * Frontend – UI Component.
+ * 
+ * Scope:
+ * This page is accessible to unauthenticated users. If a user is already authenticated, they will be redirected to the dashboard. It serves as the entry point for users to access their accounts.
+ * 
+ * Used In:
+ * - AppRouter (as the main route for unauthenticated users)
+ * 
+ * Notes:
+ * This component uses React state to manage form inputs and loading/error states. It also utilizes the useAuth hook to access authentication functions and state from the AuthContext.
+ */
+
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'

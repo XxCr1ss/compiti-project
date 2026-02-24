@@ -1,3 +1,31 @@
+/**
+ * RegisterPage
+ * 
+ * This component provides a registration form for new users. It includes
+ * fields for email, password, and password confirmation, along with validation
+ * to ensure that the passwords match and meet minimum length requirements.
+ * 
+ * Responsibilities:
+ * - Render a user-friendly registration form.
+ * - Handle form submission and call the signUp function from the authentication context.
+ * - Display error messages for validation issues or registration failures.
+ * - Redirect users to the dashboard upon successful registration.
+ * 
+ * Layer:
+ * Frontend – UI Component.
+ * 
+ * Scope:
+ * This page is accessible to unauthenticated users. It serves as the entry point for new users to create an account and access the application's features.
+ * 
+ * Used In:
+ * - AppRouter (as the main route for unauthenticated users)
+ * 
+ * Notes:
+ * This component uses React state to manage form inputs and loading/error states. 
+ * It also utilizes the useAuth hook to access authentication functions and state from the AuthContext. 
+ * The form includes basic validation to ensure a better user experience.
+ */
+
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
@@ -12,6 +40,18 @@ export const RegisterPage = () => {
   const { signUp } = useAuth()
   const navigate = useNavigate()
 
+  /**
+   * handleSubmit
+   * 
+   * This function is called when the user submits the registration form. 
+   * It performs validation checks on the password fields to ensure they match and meet length requirements. 
+   * If validation passes, it calls the signUp function from the authentication context to create a new user account. 
+   * If registration is successful, it redirects the user to the dashboard. 
+   * If any errors occur during registration, it sets an appropriate error message to be displayed to the user.
+   * 
+   * @param e FormEvent from the registration form submission. This event is used to prevent the default form submission behavior and to access form data for processing.
+   * @returns void
+   */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError('')

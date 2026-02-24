@@ -1,3 +1,28 @@
+/**
+ * DashboardPage
+ * 
+ * This component represents the main dashboard page of the Compiti application.
+ * 
+ * Responsibilities:
+ * - Display user information and a welcome message.
+ * - Provide a logout button to end the user session.
+ * - Serve as the landing page after successful authentication.
+ * 
+ * Layer:
+ * Frontend – UI Component.
+ * 
+ * Scope:
+ * This page is protected and only accessible to authenticated users. It will display
+ * user-specific content in the future, such as spaces and notes.
+ * 
+ * Used In:
+ * - AppRouter (as the main protected route)
+ * 
+ * Notes:
+ * Currently, this page serves as a placeholder for future dashboard features. It demonstrates
+ * how to access user information from the authentication context and handle logout functionality.
+ */
+
 import { useAuth } from '../context/AuthContext'
 import { useRequireAuth } from '../hooks/useRequireAuth'
 
@@ -13,6 +38,19 @@ export const DashboardPage = () => {
     )
   }
 
+  /**
+   * handleLogout
+   * 
+   * This function is called when the user clicks the "Cerrar Sesión" button. It calls the signOut
+   * method from the authentication context to end the user session. If an error occurs during logout,
+   * it logs the error to the console.
+   * 
+   * Responsibilities:
+   * - Call the signOut function to log the user out.
+   * - Handle any errors that may occur during the logout process.
+   * 
+   * @returns void
+   */
   const handleLogout = async () => {
     try {
       await signOut()
