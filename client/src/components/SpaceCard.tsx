@@ -5,8 +5,8 @@
  *
  * Responsibilities:
  * - Display space title and description.
+ * - Provide click action to navigate to space detail.
  * - Provide edit and delete buttons.
- * - Trigger edit and delete actions through callback props.
  *
  * Layer:
  * Frontend – UI Component (Presentational).
@@ -16,6 +16,7 @@
  *
  * Props:
  * - space: The space object to display
+ * - onClick: Callback when card is clicked
  * - onEdit: Callback when edit button is clicked
  * - onDelete: Callback when delete button is clicked
  *
@@ -28,24 +29,38 @@ import type { Space } from '../types/space.types'
 
 interface SpaceCardProps {
   space: Space
+  onClick: (space: Space) => void
   onEdit: (space: Space) => void
   onDelete: (id: string) => void
 }
 
-export const SpaceCard = ({ space, onEdit, onDelete }: SpaceCardProps) => {
+export const SpaceCard = ({ space, onClick, onEdit, onDelete }: SpaceCardProps) => {
+  const handleEdit = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onEdit(space)
+  }
+
+  const handleDelete = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    onDelete(space.id)
+  }
+
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
+    <div
+      onClick={() => onClick(space)}
+      className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition cursor-pointer"
+    >
       <div className="flex justify-between items-start mb-3">
         <h3 className="text-xl font-semibold text-gray-800">{space.title}</h3>
         <div className="flex gap-2">
           <button
-            onClick={() => onEdit(space)}
+            onClick={handleEdit}
             className="text-blue-600 hover:text-blue-800 text-sm font-medium"
           >
             Editar
           </button>
           <button
-            onClick={() => onDelete(space.id)}
+            onClick={handleDelete}
             className="text-red-600 hover:text-red-800 text-sm font-medium"
           >
             Eliminar

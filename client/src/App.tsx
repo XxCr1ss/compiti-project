@@ -27,6 +27,7 @@
 
 import { AuthProvider } from './context/AuthContext'
 import { SpacesProvider } from './context/SpacesContext'
+import { NotesProvider } from './context/NotesContext'
 import { AppRouter } from './routes'
 
 /**
@@ -55,7 +56,9 @@ function App() {
   return (
     <AuthProvider>
       <SpacesProvider>
-        <AppRouter />
+        <NotesProvider>
+          <AppRouter />
+        </NotesProvider>
       </SpacesProvider>
     </AuthProvider>
   )

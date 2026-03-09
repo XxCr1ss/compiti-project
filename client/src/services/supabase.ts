@@ -55,4 +55,9 @@ if (!supabaseUrl || !supabaseAnonKey) {
  * This instance should be reused across the application
  * to avoid multiple client initializations.
  */
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+})
