@@ -26,6 +26,7 @@
  */
 
 import { AuthProvider } from './context/AuthContext'
+import { SpacesProvider } from './context/SpacesContext'
 import { AppRouter } from './routes'
 
 /**
@@ -53,7 +54,9 @@ function App() {
 
   return (
     <AuthProvider>
-      <AppRouter />
+      <SpacesProvider>
+        <AppRouter />
+      </SpacesProvider>
     </AuthProvider>
   )
 }
