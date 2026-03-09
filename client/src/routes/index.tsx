@@ -5,7 +5,7 @@
  *
  * Responsibilities:
  * - Define public routes (login, register).
- * - Define protected routes (dashboard, spaces).
+ * - Define protected routes (spaces, space detail, note editor).
  * - Handle route protection and redirection based on authentication state.
  *
  * Layer:
@@ -27,6 +27,8 @@ import { LoginPage } from '../pages/LoginPage'
 import { RegisterPage } from '../pages/RegisterPage'
 import { DashboardPage } from '../pages/DashboardPage'
 import { SpacesPage } from '../pages/SpacesPage'
+import { SpaceDetailPage } from '../pages/SpaceDetailPage'
+import { NoteEditorPage } from '../pages/NoteEditorPage'
 import { useAuth } from '../context/AuthContext'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -90,6 +92,30 @@ export const AppRouter = () => {
           element={
             <ProtectedRoute>
               <SpacesPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/spaces/:spaceId"
+          element={
+            <ProtectedRoute>
+              <SpaceDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/spaces/:spaceId/notes/new"
+          element={
+            <ProtectedRoute>
+              <NoteEditorPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/spaces/:spaceId/notes/:noteId"
+          element={
+            <ProtectedRoute>
+              <NoteEditorPage />
             </ProtectedRoute>
           }
         />
