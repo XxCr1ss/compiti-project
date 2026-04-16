@@ -21,6 +21,7 @@ export interface Note {
   space_id: string
   title: string
   content: string | null
+  image_url: string | null
   created_at: string
   updated_at: string
 }
@@ -29,14 +30,17 @@ export interface CreateNoteDTO {
   space_id: string
   title: string
   content?: string
+  image_url?: string
 }
 
 export interface UpdateNoteDTO {
   title?: string
   content?: string
+  image_url?: string
 }
 
 export interface NoteFormData {
   title: string
   content: string
+  image?: File | null
 }

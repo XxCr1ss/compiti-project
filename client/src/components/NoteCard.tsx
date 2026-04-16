@@ -5,6 +5,7 @@
  *
  * Responsibilities:
  * - Display note title and preview of content.
+ * - Display note image if available.
  * - Provide click action to view/edit the note.
  * - Provide delete button.
  * - Show timestamp.
@@ -46,22 +47,34 @@ export const NoteCard = ({ note, onClick, onDelete }: NoteCardProps) => {
   return (
     <div
       onClick={() => onClick(note)}
-      className="bg-white rounded-lg shadow-md p-5 hover:shadow-lg transition cursor-pointer"
+      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition cursor-pointer"
     >
-      <div className="flex justify-between items-start mb-3">
-        <h3 className="text-lg font-semibold text-gray-800 flex-1">{note.title}</h3>
-        <button
-          onClick={handleDelete}
-          className="text-red-600 hover:text-red-800 text-sm font-medium ml-2"
-        >
-          Eliminar
-        </button>
-      </div>
+      {note.image_url && (
+        <div className="w-full h-48 overflow-hidden bg-gray-100">
+          <img
+            src={note.image_url}
+            alt={note.title}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+      
+      <div className="p-5">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-lg font-semibold text-gray-800 flex-1">{note.title}</h3>
+          <button
+            onClick={handleDelete}
+            className="text-red-600 hover:text-red-800 text-sm font-medium ml-2"
+          >
+            Eliminar
+          </button>
+        </div>
 
-      <p className="text-gray-600 text-sm mb-3 line-clamp-3">{contentPreview}</p>
+        <p className="text-gray-600 text-sm mb-3 line-clamp-3">{contentPreview}</p>
 
-      <div className="text-xs text-gray-400">
-        Actualizado: {new Date(note.updated_at).toLocaleDateString('es-ES')}
+        <div className="text-xs text-gray-400">
+          Actualizado: {new Date(note.updated_at).toLocaleDateString('es-ES')}
+        </div>
       </div>
     </div>
   )

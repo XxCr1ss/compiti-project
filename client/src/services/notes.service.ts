@@ -27,6 +27,7 @@
 
 import { supabase } from './supabase'
 import type { Note, CreateNoteDTO, UpdateNoteDTO } from '../types/note.types'
+import * as storageService from './storage.service'
 
 /**
  * Fetch all notes for a specific space
@@ -160,7 +161,7 @@ export const updateNote = async (id: string, updates: UpdateNoteDTO): Promise<No
 }
 
 /**
- * Delete a note
+ * Delete a note and its associated image
  */
 export const deleteNote = async (id: string): Promise<void> => {
   const {
@@ -171,6 +172,28 @@ export const deleteNote = async (id: string): Promise<void> => {
     throw new Error('Usuario no autenticado')
   }
 
+  // First obtain the note to know if a image exists
+  const { data: note, error: fetchError } = await supabase
+    .from('notes')
+    .select('image_url')
+    .eq('id', id)
+    .single()
+
+  if (fetchError) {
+    console.error('Error fetching note for deletion:', fetchError)
+  }
+
+  // Delete the image if exits
+  if (note?.image_url) {
+    try {
+      await storageService.deleteImage(note.image_url)
+    } catch (err) {
+      console.error('Error deleting image:', err)
+      // Continuar con la eliminación de la nota aunque falle la imagen
+    }
+  }
+
+  // Delete de note
   const { error } = await supabase.from('notes').delete().eq('id', id)
 
   if (error) {
