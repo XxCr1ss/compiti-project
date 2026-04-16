@@ -30,6 +30,7 @@ import { SpacesPage } from '../pages/SpacesPage'
 import { SpaceDetailPage } from '../pages/SpaceDetailPage'
 import { NoteEditorPage } from '../pages/NoteEditorPage'
 import { useAuth } from '../context/AuthContext'
+import { NoteDetailPage } from '../pages/NoteDetailPage'
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { user, loading } = useAuth()
@@ -113,6 +114,22 @@ export const AppRouter = () => {
         />
         <Route
           path="/spaces/:spaceId/notes/:noteId"
+          element={
+            <ProtectedRoute>
+              <NoteEditorPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/spaces/:spaceId/notes/:noteId/view"
+          element={
+            <ProtectedRoute>
+              <NoteDetailPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/spaces/:spaceId/notes/:noteId/edit"
           element={
             <ProtectedRoute>
               <NoteEditorPage />
