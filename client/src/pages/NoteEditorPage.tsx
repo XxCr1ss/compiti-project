@@ -16,7 +16,7 @@
  * This is a protected route for creating new notes or editing existing ones.
  *
  * Used In:
- * - AppRouter (as a protected route with :spaceId and optional :noteId params)
+ * - AppRouter (as a protected route with :spaceId and optional :noteId params for creation and edition)
  *
  * Notes:
  * Uses URL params to determine if creating a new note or editing an existing one.
@@ -94,21 +94,25 @@ export const NoteEditorPage = () => {
         content: data.content,
         image_url: imageUrl,
       })
+      navigate(`/spaces/${spaceId}/notes/${noteId}/view`)
     } else {
       // Create new note
-      await createNote({
+      const newNote = await createNote({
         space_id: spaceId,
         title: data.title,
         content: data.content,
         image_url: imageUrl,
       })
+      navigate(`/spaces/${spaceId}/notes/${newNote.id}/view`)
     }
-
-    navigate(`/spaces/${spaceId}`)
   }
 
   const handleCancel = () => {
-    navigate(`/spaces/${spaceId}`)
+    if (noteId) {
+      navigate(`/spaces/${spaceId}/notes/${noteId}/view`)
+    } else {
+      navigate(`/spaces/${spaceId}`)
+    }
   }
 
   if (authLoading || loading) {

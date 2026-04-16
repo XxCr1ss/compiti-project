@@ -61,7 +61,7 @@ export const SpaceDetailPage = () => {
   }
 
   const handleNoteClick = (note: Note) => {
-    navigate(`/spaces/${spaceId}/notes/${note.id}`)
+    navigate(`/spaces/${spaceId}/notes/${note.id}/view`)
   }
 
   const handleDeleteNote = async (noteId: string) => {

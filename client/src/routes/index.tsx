@@ -113,14 +113,6 @@ export const AppRouter = () => {
           }
         />
         <Route
-          path="/spaces/:spaceId/notes/:noteId"
-          element={
-            <ProtectedRoute>
-              <NoteEditorPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path="/spaces/:spaceId/notes/:noteId/view"
           element={
             <ProtectedRoute>
